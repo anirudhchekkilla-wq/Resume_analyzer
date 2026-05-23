@@ -1,5 +1,6 @@
 # Resume_analyzer
 A smart AI-powered Resume Analyzer built using Flask, MySQL, Bootstrap, and PDF processing. This project helps users upload resumes, analyze skills based on selected job roles, calculate resume scores, identify missing skills, and generate improvement suggestions instantly.
+<br>
 🚀 Features
 🔐 User Authentication (Signup/Login)
 📤 Upload Resume PDF or Paste Resume Text
@@ -11,21 +12,25 @@ A smart AI-powered Resume Analyzer built using Flask, MySQL, Bootstrap, and PDF 
 📄 Download Resume Analysis Report as PDF
 📝 Feedback System
 💾 MySQL Database Integration
+<br>
 🛠️ Tech Stack
 Backend: Flask, SQLAlchemy
 Frontend: HTML, Bootstrap, Chart.js
 Database: MySQL
 PDF Processing: PyPDF2, ReportLab
+<br>
 📌 Supported Roles
 Python Developer
 Web Developer
 Data Analyst
+<br>
 📷 Project Modules
 Authentication System
 Resume Upload & Analysis
 Dashboard Analytics
 PDF Report Generator
 Feedback Management
+<br>
 🔧 Future Improvements
 AI/ML-based Resume Matching
 ATS Score Optimization
