@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Battle{% endblock %}
+
+{% block extra_css %}
+<style>
+
+/* Center layout */
+.battle-container {
+    min-height: 100vh;
+}
+
+/* Fade animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Battle cards */
+.battle-card {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* VS text */
+.vs-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="battle-container d-flex flex-column justify-content-center">
+
+    <h2 class="text-center mb-4 fade-in">⚔️ Resume Battle</h2>
+
+    <form method="POST">
+
+        <div class="row align-items-center">
+
+            <!-- 🔹 Resume 1 -->
+            <div class="col-md-5">
+                <div class="battle-card fade-in" style="animation-delay:0.1s;">
+
+                    <h5 class="mb-3">📄 Resume 1</h5>
+
+                    <select name="resume1" class="form-control">
+                        {% for r in resumes %}
+                        <option value="{{ r.id }}">{{ r.file_name or "Manual Resume" }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- ⚔️ VS -->
+            <div class="col-md-2 text-center">
+                <div class="vs-text fade-in" style="animation-delay:0.2s;">
+                    VS
+                </div>
+            </div>
+
+            <!-- 🔹 Resume 2 -->
+            <div class="col-md-5">
+                <div class="battle-card fade-in" style="animation-delay:0.3s;">
+
+                    <h5 class="mb-3">📄 Resume 2</h5>
+
+                    <select name="resume2" class="form-control">
+                        {% for r in resumes %}
+                        <option value="{{ r.id }}">{{ r.file_name or "Manual Resume" }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 🔥 Button -->
+        <div class="text-center mt-4 fade-in" style="animation-delay:0.4s;">
+            <button class="btn btn-primary px-5">
+                ⚔️ Compare Resumes
+            </button>
+        </div>
+
+    </form>
+
+    <!-- 🏆 RESULT -->
+    {% if result %}
+    <div class="card mt-5 p-4 text-center fade-in" style="animation-delay:0.5s;">
+
+        <h4 class="text-secondary">🏆 Winner</h4>
+
+        <h2 class="text-success mt-2">{{ result }}</h2>
+
+        <p class="text-secondary mt-2">
+            This resume has better score and overall quality 🚀
+        </p>
+
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

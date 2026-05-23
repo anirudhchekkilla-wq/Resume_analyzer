@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Resume Analyzer{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Style -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            position: fixed;
+            background: #020617;
+            padding: 20px;
+        }
+
+        .sidebar h4 {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 15px 0;
+            padding: 8px 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #1e293b;
+            color: #38bdf8;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 260px;
+            padding: 25px;
+        }
+
+        /* Cards */
+        .card {
+            background: #1e293b;
+            border: none;
+            border-radius: 15px;
+            color: #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(90deg, #38bdf8, #6366f1);
+            border: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            border: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            border: none;
+        }
+
+        /* Progress Bar */
+        .progress {
+            background: #334155;
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #38bdf8, #6366f1);
+        }
+
+        /* Inputs */
+        input, textarea, select {
+            background: #020617 !important;
+            color: #e2e8f0 !important;
+            border: 1px solid #334155 !important;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #38bdf8 !important;
+            box-shadow: none !important;
+        }
+         .hero-right{ flex: 0 0 520px; display:flex; align-items:center; justify-content:center; }
+  .spline-wrap{ width: 100%; max-width:520px; height:420px; background: linear-gradient(180deg, rgba(12,14,18,0.95) 0%, rgba(5,8,12,0.95) 100%); border-radius:18px; overflow:hidden;  
+   
+     display:flex; align-items:center; justify-content:center; }
+  .spline-wrap iframe{ width:100%; height:100%; border:0; display:block; }
+
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    {% if session.get('user_id') %}
+    <div class="sidebar">
+        <h4>🚀 Resume Analyzer</h4>
+        
+        <hr>
+
+        <a href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="/upload"><i class="fas fa-upload"></i> Upload</a>
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        <a href="/compare" class="btn btn-lg">⚔️ Resume Battle</a>
+        <a href="/logout" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    {% endif %}
+    
+
+    <!-- Main Content -->
+    <div class="main">
+
+        {% block content %}{% endblock %}
+            </div>
+    
+
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block extra_js %}{% endblock %}
+    <div class="container mt-3">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+
+            <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm">
+
+                {{ message }}
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+</div>
+
+</body>
+</html>

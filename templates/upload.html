@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Resume{% endblock %}
+
+{% block extra_css %}
+<style>
+
+/* Loader steps */
+#analysisLoader p {
+    font-size: 15px;
+    margin: 8px 0;
+}
+
+/* Smooth fade */
+.fade-in {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">📤 Upload Resume</h2>
+
+<div class="row">
+
+    <!-- 🔹 LEFT SIDE FORM -->
+    <div class="col-md-6">
+
+        <!-- FORM CARD -->
+        <div class="card p-4" id="formCard">
+
+            <form method="POST" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label>Select Job Role</label>
+                    <select name="role" class="form-control">
+                        <option value="python developer">Python Developer</option>
+                        <option value="web developer">Web Developer</option>
+                        <option value="data analyst">Data Analyst</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Upload Resume</label>
+                    <input type="file" name="resume" class="form-control">
+                </div>
+
+                <div class="text-center text-secondary mb-2">OR</div>
+
+                <div class="mb-3">
+                    <label>Paste Resume Text</label>
+                    <textarea name="resume_text" class="form-control" rows="5"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    🚀 Analyze Resume
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- 🔥 ANALYSIS LOADER -->
+        <div id="analysisLoader" class="card p-4 text-center fade-in" style="display:none;">
+
+            <h5 class="mb-3">🤖 Analyzing your resume...</h5>
+
+            <div id="steps" class="text-start mt-3">
+                <p id="step1">⏳ Checking skills...</p>
+                <p id="step2">⏳ Matching job role...</p>
+                <p id="step3">⏳ Evaluating resume quality...</p>
+                <p id="step4">⏳ Generating suggestions...</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 🔹 RIGHT SIDE RESULT -->
+    <div class="col-md-6">
+
+        <!-- RESULTS -->
+        <div id="resultSection" style="display:none;">
+
+            <div class="card p-4 fade-in">
+
+                <h4 class="mb-3">📊 Analysis Result</h4>
+
+                <div class="mb-3">
+                    <b>🎯 Score:</b> {{ score }}%
+                    <div class="progress mt-2">
+                        <div class="progress-bar" style="width: {{ score }}%">
+                            {{ score }}%
+                        </div>
+                    </div>
+                </div>
+
+                <p><b>✅ Matched Skills:</b><br> {{ matched }}</p>
+                <p><b>❌ Missing Skills:</b><br> {{ missing }}</p>
+
+                <p><b>💡 Suggestions:</b><br> {{ suggestions }}</p>
+
+                <hr>
+
+                <p><b>✅ Strengths:</b><br> {{ strengths }}</p>
+                <p><b>⚠️ Issues:</b><br> {{ issues }}</p>
+
+            </div>
+
+        </div>
+
+        <!-- EMPTY STATE -->
+        {% if not text %}
+        <div class="card p-4 text-center">
+            <h5 style="color: rgb(217, 223, 224);">📄 No Resume Uploaded Yet</h5>
+            <p  style="color: rgb(231, 237, 237);">Upload a resume to see analysis here</p>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+
+// 🧠 When page loads (after Flask response)
+window.onload = function () {
+
+    const hasResult = "{{ text }}";
+
+    if (hasResult) {
+
+        document.getElementById("formCard").style.display = "none";
+        document.getElementById("analysisLoader").style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById("step1").innerHTML = "✅ Skills analyzed";
+        }, 800);
+
+        setTimeout(() => {
+            document.getElementById("step2").innerHTML = "✅ Role matched";
+        }, 1600);
+
+        setTimeout(() => {
+            document.getElementById("step3").innerHTML = "✅ Quality checked";
+        }, 2400);
+
+        setTimeout(() => {
+            document.getElementById("step4").innerHTML = "✅ Suggestions generated";
+        }, 3200);
+
+        // Show results after animation
+        setTimeout(() => {
+            document.getElementById("analysisLoader").style.display = "none";
+            document.getElementById("resultSection").style.display = "block";
+        }, 4000);
+    }
+
+};
+
+</script>
+
+{% endblock %}

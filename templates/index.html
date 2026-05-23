@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<style>
+
+/* Gradient Background */
+.hero {
+    background: radial-gradient(circle at top left, #1e293b, #020617);
+    padding: 80px 40px;
+    border-radius: 20px;
+}
+
+/* Upload Box */
+.upload-box {
+    border: 2px dashed #38bdf8;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    background: #1e293b;
+    transform: scale(1.02);
+}
+
+/* Fade Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+   .hero-right{ flex: 0 0 520px; display:flex; align-items:center; justify-content:center; }
+  .spline-wrap{ width: 100%; max-width:520px; height:420px; background: linear-gradient(180deg, rgba(12,14,18,0.95) 0%, rgba(5,8,12,0.95) 100%); border-radius:18px; overflow:hidden;  
+   
+     display:flex; align-items:center; justify-content:center; }
+  .spline-wrap iframe{ width:100%; height:100%; border:0; display:block; }
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="hero">
+
+    <div class="row align-items-center">
+
+        <!-- 🔹 LEFT SIDE -->
+        <div class="col-md-6">
+
+            <p class="text-info fade-in">RESUME CHECKER</p>
+
+            <h1 class="fw-bold mb-3 fade-in" style="animation-delay:0.1s;">
+                Is your resume good enough?
+            </h1>
+
+            <p class="text-secondary fade-in" style="animation-delay:0.2s;">
+                Analyze your resume instantly with AI and discover how to improve your chances of getting hired.
+            </p>
+
+            <!-- Upload Box -->
+            <div class="upload-box mt-4 fade-in" style="animation-delay:0.3s;">
+
+                <p class="mb-2">📂 Drop your resume here or choose a file</p>
+                <small class="text-secondary">PDF only • Max 2MB</small>
+
+                <form action="/upload" method="GET">
+                    <button class="btn btn-primary mt-3 px-4">
+                        Upload Your Resume
+                    </button>
+                </form>
+
+                <p class="mt-2 text-secondary">🔒 Privacy guaranteed</p>
+
+            </div>
+
+        </div>
+
+        <!-- 🔹 RIGHT SIDE -->
+          <div class="hero-right">
+      <!-- Replace the iframe URL with your Spline public scene link or use spline-viewer as needed -->
+      <!-- Example Spline iframe placeholder: -->
+      <div class="spline-wrap" aria-hidden="true">
+       <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.0/build/spline-viewer.js"></script>
+
+<spline-viewer id="splineViewer" 
+  url='https://prod.spline.design/yWjuSeXdPr7dd2Xy/scene.splinecode'>
+</spline-viewer>
+
+      </div>
+    </div>
+        </div>
+
+       
+
+    </div>
+
+</div>
+
+{% endblock %}

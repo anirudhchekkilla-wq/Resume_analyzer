@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<style>
+
+/* Center full screen */
+.auth-container {
+    min-height: 100vh;
+}
+
+/* Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center auth-container">
+
+    <div class="card p-4 fade-in" style="width: 400px;">
+
+        <h3 class="text-center mb-2">🔐 Welcome Back</h3>
+        <p class="text-center text-secondary mb-4">
+            Login to continue your analysis
+        </p>
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-2">
+                Login
+            </button>
+
+        </form>
+
+        <div class="text-center mt-3">
+            <span class="text-secondary">Don't have an account?</span><br>
+            <a href="/signup" class="text-info">Create account</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
