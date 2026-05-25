@@ -345,7 +345,59 @@ def logout():
 
     return redirect('/login')
 
+# ------------------ COMPARE ------------------
 
+@app.route('/compare', methods=['GET', 'POST'])
+def compare():
+
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    resumes = Resume.query.filter_by(
+        user_id=session['user_id']
+    ).all()
+
+    result = None
+
+    if request.method == 'POST':
+
+        r1_id = request.form.get('resume1')
+
+        r2_id = request.form.get('resume2')
+
+        a1 = AnalysisResult.query.filter_by(
+            resume_id=r1_id
+        ).first()
+
+        a2 = AnalysisResult.query.filter_by(
+            resume_id=r2_id
+        ).first()
+
+        if a1 and a2:
+
+            if a1.score > a2.score:
+
+                result = (
+                    f"Resume 1 wins with "
+                    f"{a1.score}% 🎉"
+                )
+
+            elif a2.score > a1.score:
+
+                result = (
+                    f"Resume 2 wins with "
+                    f"{a2.score}% 🎉"
+                )
+
+            else:
+
+                result = "It's a Tie 🤝"
+
+    return render_template(
+        'compare.html',
+        resumes=resumes,
+        result=result
+    )
 # ------------------ UPLOAD ------------------
 
 @app.route('/upload', methods=['GET', 'POST'])
